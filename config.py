@@ -1,1 +1,2 @@
-__author__ = 'Ryan'
+CSRF_ENABLED = True
+SECRET_KEY = 'hard-to-guess-string'
