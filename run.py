@@ -7,10 +7,19 @@ if os.environ.get('TODO_COVERAGE'):
     COV = coverage.coverage(branch=True, include='app/*')
     COV.start()
 
-from app import app
-from flask.ext.script import Manager
+from app import create_app, db
+from flask.ext.script import Manager, Shell
+from flask.ext.migrate import Migrate, MigrateCommand
 
+app = create_app(os.getenv('TODO_CONFIG') or 'default')
 manager = Manager(app)
+migrate = Migrate(app, db)
+
+def make_shell_context():
+    return dict(app=app, db=db)
+
+manager.add_command("shell", Shell(make_context=make_shell_context))
+manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test(coverage=False):
@@ -34,4 +43,6 @@ def test(coverage=False):
         COV.erase()
 
 if __name__ == '__main__':
+    print "Now running %s mode" % (os.getenv('TODO_CONFIG') or 'development')
     manager.run()
+
