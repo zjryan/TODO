@@ -3,9 +3,11 @@
     <td>{{ task.content }}</td>
     <td>{{ moment(task.timestamp).format('LLL') }}</td>
     <td>
+        {% if not task.completed %}
         <a href="{{ url_for('.complete_task', id=task.id) }}">
             <span class="label label-primary">Complete</span>
         </a>
+        {% endif %}
         <a href="{{ url_for('.delete_task', id=task.id) }}">
             <span class="label label-danger">Delete</span>
         </a>
