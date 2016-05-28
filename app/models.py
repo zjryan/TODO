@@ -1,4 +1,5 @@
 from app import db, login_manager
+from datetime import datetime
 from flask.ext.login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -7,6 +8,7 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True)
     password_hash = db.Column(db.String(128))
+    tasks = db.relationship('Task', backref='author')
 
     @property
     def password(self):
@@ -26,3 +28,18 @@ class User(UserMixin, db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+class Task(db.Model):
+    __tablename__ = 'tasks'
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(64))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    completed = db.Column(db.Boolean, default=False)
+
+    def complete_task(self):
+        self.completed = True
+        db.session.add(self)
+
+    def __repr__(self):
+        return "Task %r" % self.content

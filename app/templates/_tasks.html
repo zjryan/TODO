@@ -1,0 +1,14 @@
+<tr>
+    <td>{{ task_index }}</td>
+    <td>{{ task.content }}</td>
+    <td>{{ moment(task.timestamp).format('LLL') }}</td>
+    <td>
+        <a href="{{ url_for('.complete_task', id=task.id) }}">
+            <span class="label label-primary">Complete</span>
+        </a>
+        <a href="{{ url_for('.delete_task', id=task.id) }}">
+            <span class="label label-danger">Delete</span>
+        </a>
+    </td>
+</tr>
+{% set task_index = task_index + 1 %}
