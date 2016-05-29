@@ -1,56 +1,10 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %} TODO - Home {% endblock %}
 
 {% block page_content %}
-{% if current_user.is_authenticated %}
 <div class="page-header">
-    <h1>{{ current_user.username }}'s TODO</h1>
+    <h1>Hello, {% if current_user.is_authenticated %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
 </div>
-<br>
-<div class="col-md-5">
-    {{ wtf.quick_form(form) }}
-</div>
-<div class="col-md-10">
-    <ul class="nav nav-tabs">
-        <li {% if not show_finished %} class="active" {% endif %}>
-            <a href="{{ url_for('.show_unfinished') }}">Unfinished</a>
-        </li>
-        <li {% if show_finished %} class="active" {% endif %}>
-            <a href="{{ url_for('.show_finished') }}">Finished</a>
-        </li>
-    </ul>
-    <table class="table table-striped">
-    <thead>
-    <tr>
-        <th>#</th>
-        <th>Task</th>
-        <th>Time</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% set task_index = 1 %}
-    {% if show_finished %}
-    {% for task in tasks %}
-        {% if task.completed %}
-        {% include "_tasks.html" %}
-        {% endif %}
-    {% endfor %}
-    {% else %}
-    {% for task in tasks %}
-        {% if not task.completed %}
-        {% include "_tasks.html" %}
-        {% endif %}
-    {% endfor %}
-    {% endif %}
-    </tbody>
-</table>
-</div>
-{% else %}
-<div class="page-header">
-    <h1>Welcome, Stranger!</h1>
-</div>
-{% endif %}
 {% endblock %}

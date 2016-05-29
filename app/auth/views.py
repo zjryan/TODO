@@ -30,7 +30,7 @@ def register():
         else:
             db.session.add(user)
             flash('You have successfully registered.')
-        redirect(url_for('main.index'))
+            return redirect(url_for('main.index'))
     return render_template('auth/register.html',
                            form=form)
 

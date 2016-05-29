@@ -43,6 +43,5 @@ def test(coverage=False):
         COV.erase()
 
 if __name__ == '__main__':
-    print "Now running %s mode" % (os.getenv('TODO_CONFIG') or 'development')
     manager.run()
 

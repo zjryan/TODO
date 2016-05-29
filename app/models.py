@@ -39,7 +39,23 @@ class Task(db.Model):
 
     def complete_task(self):
         self.completed = True
+        self.timestamp = datetime.utcnow()
         db.session.add(self)
+
+    @staticmethod
+    def generate_fake(count=50):
+        from random import seed, randint
+        import forgery_py
+
+        seed()
+        user_count = User.query.count()
+        for i in range(count):
+            u = User.query.offset(randint(0, user_count - 1)).first()
+            t = Task(content=forgery_py.lorem_ipsum.words(randint(1, 3)),
+                     timestamp=forgery_py.date.date(True),
+                     author=u)
+            db.session.add(t)
+            db.session.commit()
 
     def __repr__(self):
         return "Task %r" % self.content

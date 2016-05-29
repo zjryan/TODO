@@ -37,3 +37,8 @@ class TaskModelTestCase(unittest.TestCase):
         self.assertTrue(t.completed is True)
         db.session.delete(t)
         db.session.commit()
+
+    def test_generate_fake_number(self):
+        Task.generate_fake(50)
+        count = Task.query.count()
+        self.assertTrue(count is 50)

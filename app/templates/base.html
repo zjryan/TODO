@@ -2,6 +2,11 @@
 
 {% block title %}TODO{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
 {% block navbar %}
 <div class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -25,10 +30,12 @@
                         {{ current_user.username }}<b class="caret"></b>
                     </a>
                         <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('.todo', username=current_user.username) }}">To-do</a></li>
                             <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                         </ul>
                     </li>
                 {% else %}
+                    <li><a href="{{ url_for('auth.register') }}">Register</a></li>
                     <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                 {% endif %}
             </ul>

@@ -1,0 +1,16 @@
+div.pagination {
+    width: 100%;
+    test-align: right;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.center-block {
+    margin.left: auto;
+    margin.right: auto;
+}
+
+div.task-tabs {
+    margin: 0px;
+    border-top: none;
+}
