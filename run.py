@@ -42,6 +42,13 @@ def test(coverage=False):
         print "HTML version: file://%s/index.html" % covdir
         COV.erase()
 
+@manager.command
+def deploy():
+    """Run deployment tasks."""
+    from flask.ext.migrate import upgrade
+
+    upgrade()
+
 if __name__ == '__main__':
     manager.run()
 
