@@ -41,6 +41,7 @@ class Task(db.Model):
         self.completed = True
         self.timestamp = datetime.utcnow()
         db.session.add(self)
+        db.session.commit()
 
     @staticmethod
     def generate_fake(count=50):

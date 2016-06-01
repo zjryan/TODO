@@ -21,6 +21,7 @@ def todo(username):
         task = Task(content=form.content.data,
                     author=user)
         db.session.add(task)
+        db.session.commit()
         flash('Successfully added a task.')
         return redirect(url_for('.todo', username=user.username))
     show_completed = False
