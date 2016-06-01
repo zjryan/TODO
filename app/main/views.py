@@ -45,7 +45,6 @@ def todo(username):
                            show_finished=show_completed,
                            pagination=pagination)
 
-
 @main.route('/delete_task/<int:id>')
 @login_required
 def delete_task(id):
