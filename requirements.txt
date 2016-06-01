@@ -22,7 +22,7 @@ SQLAlchemy==0.8.4
 sqlalchemy-migrate==0.10.0
 sqlparse==0.1.19
 Tempita==0.5.2
-Werkzeug==0.9.4
+Werkzeug==0.9.6
 wheel==0.24.0
 WTForms==1.0.5
 psycopg2==2.4.4
