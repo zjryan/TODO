@@ -54,6 +54,7 @@ def delete_task(id):
         abort(403)
     if task is not None:
         db.session.delete(task)
+        db.session.commit()
     return redirect(url_for('.todo', username=task.author.username))
 
 @main.route('/complete_task/<int:id>')
