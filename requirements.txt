@@ -26,3 +26,4 @@ Werkzeug==0.9.4
 wheel==0.24.0
 WTForms==1.0.5
 psycopg2==2.4.4
+Flask-SSLify==0.1.4
